@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
+
 public class Drivetrain extends SubsystemBase{
 
     private CANSparkMax leftDrive1;
@@ -50,7 +51,7 @@ public class Drivetrain extends SubsystemBase{
             rightencoder.setDistancePerPulse(1.0);
            
         gyro = new AnalogGyro(0);
-            addChild("gyro",gyro);
+           addChild("gyro",gyro);
             gyro.setSensitivity(0.007);
            
         rangefinder = new AnalogInput(1);

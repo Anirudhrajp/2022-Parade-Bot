@@ -3,14 +3,16 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import frc.robot.Constants;
 
 
 
@@ -29,12 +31,16 @@ public class Drivetrain extends SubsystemBase{
     private AnalogInput rangefinder;    
 
     public Drivetrain() {
-        leftDrive1 = new CANSparkMax(1, MotorType.kBrushless);
-        leftDrive2 = new CANSparkMax(2, MotorType.kBrushless);
+        leftDrive1 = new CANSparkMax(Constants.kLeftDrive1, MotorType.kBrushless);
+            leftDrive1.setInverted(false);
+        leftDrive2 = new CANSparkMax(Constants.kLeftDrive2, MotorType.kBrushless);
+            leftDrive2.setInverted(false);
         leftMotor = new MotorControllerGroup(leftDrive1, leftDrive2);
 
-        rightDrive1 = new CANSparkMax(3, MotorType.kBrushless);
-        rightDrive2 = new CANSparkMax(3, MotorType.kBrushless);
+        rightDrive1 = new CANSparkMax(Constants.kRightDrive1, MotorType.kBrushless);
+            rightDrive1.setInverted(true);
+        rightDrive2 = new CANSparkMax(Constants.kRightDrive2, MotorType.kBrushless);
+            rightDrive2.setInverted(true);
         rightMotor = new MotorControllerGroup(rightDrive1, rightDrive2);
 
         drive = new DifferentialDrive(leftMotor, rightMotor);
@@ -63,6 +69,10 @@ public class Drivetrain extends SubsystemBase{
     public void periodic() {
         // This method will be called once per scheduler run
 
+    }
+
+    public void driveWithPS4(PS4Controller ps4Controller, double speed) {
+        drive.tankDrive(ps4Controller.getLeftY()*Constants.kspeed, ps4Controller.getRightY()*Constants.kspeed);
     }
 
     @Override

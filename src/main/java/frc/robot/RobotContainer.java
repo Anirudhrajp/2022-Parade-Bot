@@ -5,10 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.TankDrive;
+import frc.robot.subsystems.Drivetrain;
+
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,14 +20,19 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final Drivetrain drivetrainSubsystem = new Drivetrain();
+  private final TankDrive tankDriveCommand = new TankDrive(drivetrainSubsystem);
+
+  public static PS4Controller ps4Controller;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    tankDriveCommand.addRequirements(drivetrainSubsystem);
+    ps4Controller = new PS4Controller(Constants.kButton);
+    drivetrainSubsystem.setDefaultCommand(tankDriveCommand);
   }
 
   /**
@@ -41,8 +48,11 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+
+   /*
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
+  */
 }

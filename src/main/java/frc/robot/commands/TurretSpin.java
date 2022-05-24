@@ -6,32 +6,34 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Turret;
 
 
-public class TankDrive extends CommandBase {
 
-  private final Drivetrain m_drivetrain;
+public class TurretSpin extends CommandBase {
 
-  public TankDrive(Drivetrain drivetrain) {
-    m_drivetrain = drivetrain;
-    addRequirements(drivetrain);
+  private final Turret m_turret;
+
+  /** Creates a new TurretSpin. */
+  public TurretSpin(Turret turret) {
+    m_turret = turret;
+    addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    System.out.println("Initialize TankDrive");
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
-  @Override
+  //@Override
   public void execute() {
-   m_drivetrain.driveWithPS4(RobotContainer.ps4Controller, Constants.kSpeed);
-   System.out.println("Execute TankDrive");
-   System.out.println(RobotContainer.ps4Controller.getLeftY());
+    if (RobotContainer.ps4Controller.getL1Button() == true) {
+      m_turret.turretLeft();
+    } else if (RobotContainer.ps4Controller.getR1Button() == true) {
+      m_turret.turretRight();
+    } else m_turret.turretStop();
   }
 
   // Called once the command ends or is interrupted.

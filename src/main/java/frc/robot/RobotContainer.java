@@ -7,8 +7,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PS4Controller.Button;
+import frc.robot.commands.ShooterDown;
+import frc.robot.commands.ShooterUp;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.TurretSpin;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 
 
 
@@ -24,6 +30,13 @@ public class RobotContainer {
   private final Drivetrain drivetrainSubsystem = new Drivetrain();
   private final TankDrive tankDriveCommand = new TankDrive(drivetrainSubsystem);
 
+  //private final Shooter shooterSubsystem = new Shooter();
+  //private final ShooterUp shooterUpCommand = new ShooterUp(shooterSubsystem);
+  //private final ShooterDown shooterDownCommand = new ShooterDown(shooterSubsystem);
+
+  //private final Turret turretSubsystem = new Turret();
+  //private final TurretSpin turretSpinCommand = new TurretSpin(turretSubsystem);
+
   public static PS4Controller ps4Controller;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -31,8 +44,17 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     tankDriveCommand.addRequirements(drivetrainSubsystem);
-    ps4Controller = new PS4Controller(Constants.kButton);
     drivetrainSubsystem.setDefaultCommand(tankDriveCommand);
+
+    ps4Controller = new PS4Controller(Constants.kButton);
+
+    /*if(ps4Controller.getL1ButtonPressed()) {
+      new Shooter().SolenoidUp();
+    }*/
+
+  
+
+
   }
 
   /**

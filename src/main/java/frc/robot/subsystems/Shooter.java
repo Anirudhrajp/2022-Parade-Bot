@@ -3,10 +3,16 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class Shooter {
+public class Shooter extends SubsystemBase{
 
-    public DoubleSolenoid tshirtSolenoid = new DoubleSolenoid(1, PneumaticsModuleType.REVPH, 0, 1);
+private DoubleSolenoid tshirtSolenoid;
+
+    public Shooter() {
+        tshirtSolenoid = new DoubleSolenoid(1, PneumaticsModuleType.REVPH, Constants.kShooterDeploy, Constants.kShooterRetract);
+    }
 
     public void SolenoidUp(){
         tshirtSolenoid.set(Value.kForward);

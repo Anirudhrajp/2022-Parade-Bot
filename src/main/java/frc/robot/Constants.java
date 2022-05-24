@@ -14,12 +14,23 @@ package frc.robot;
  */
 public final class Constants {
     
-    public static final int kLeftDrive1 = 1;
-    public static final int kLeftDrive2 = 2;
-    public static final int kRightDrive1 = 3;
-    public static final int kRightDrive2 = 4;
+    //Drivetrain.java
+    public static final int kLeftDrive1 = 5;
+    public static final int kLeftDrive2 = 6;
+    public static final int kRightDrive1 = 7;
+    public static final int kRightDrive2 = 8;
 
-    public static final double kspeed = 0.5;
+    //TankDrive.java
+    public static final double kSpeed = 0.5;
 
+    //RobotContainer.java
     public static final int kButton = 0;
+
+    //Shooter
+    public static final int kShooterDeploy = 0;
+    public static final int kShooterRetract = 1;
+
+    //Turret.java
+    public static final int kTurretMotor = 5;
+    public static final double kSpinSpeed = 0.3;
 }

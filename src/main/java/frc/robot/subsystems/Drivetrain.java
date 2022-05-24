@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -44,10 +45,11 @@ public class Drivetrain extends SubsystemBase{
         rightMotor = new MotorControllerGroup(rightDrive1, rightDrive2);
 
         drive = new DifferentialDrive(leftMotor, rightMotor);
-            drive.setSafetyEnabled(true);
-            drive.setExpiration(0.1);
-            drive.setMaxOutput(1.0);
+           // drive.setSafetyEnabled(true);
+           // drive.setExpiration(0.1);
+            //drive.setMaxOutput(1.0);
 
+            /*
         leftencoder = new Encoder(0, 1, false, EncodingType.k4X); //check encoding type
             addChild("left encoder",leftencoder);
             leftencoder.setDistancePerPulse(1.0);
@@ -62,7 +64,7 @@ public class Drivetrain extends SubsystemBase{
            
         rangefinder = new AnalogInput(1);
             addChild("range finder", rangefinder);
-           
+           */
     }
 
     @Override
@@ -72,7 +74,12 @@ public class Drivetrain extends SubsystemBase{
     }
 
     public void driveWithPS4(PS4Controller ps4Controller, double speed) {
-        drive.tankDrive(ps4Controller.getLeftY()*Constants.kspeed, ps4Controller.getRightY()*Constants.kspeed);
+        drive.tankDrive(ps4Controller.getLeftY()*Constants.kSpeed, ps4Controller.getRightY()*Constants.kSpeed);
+    }
+
+
+    public void driveForward() {
+        drive.tankDrive(Constants.kSpeed, Constants.kSpinSpeed);
     }
 
     @Override

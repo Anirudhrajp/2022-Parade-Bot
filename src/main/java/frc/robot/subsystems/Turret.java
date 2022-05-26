@@ -11,8 +11,14 @@ public class Turret extends SubsystemBase{
     private final CANSparkMax turretMotor = new CANSparkMax(Constants.kTurretMotor, MotorType.kBrushless);
     public boolean alignEnabled = true;
 
+
     public Turret() {
-        //brakemode ??
+       /* turretMotor.getPIDController().setP(Constants.kTurretKp);
+        turretMotor.getPIDController().setI(Constants.kTurretKi);
+        turretMotor.getPIDController().setD(Constants.kTurretKd);
+        turretMotor.getPIDController().setFF(Constants.kTurretKf);
+        turretMotor.getPIDController().setIZone(Constants.kTurretIZone);
+        */
     }
 
     public void turretLeft() {
@@ -30,5 +36,11 @@ public class Turret extends SubsystemBase{
     public void turretStop() {
         turretMotor.set(0);
     }
+
+    /*
+    public void setDesiredAngle(Rotation2d angle) {
+        turretMotor.changeControlMode(CANSparkMax.ControlType.get);
+        talon_.set(angle.getRadians() / (2 * Math.PI * Constants.kTurretRotationsPerTick));
+        */
 }
  

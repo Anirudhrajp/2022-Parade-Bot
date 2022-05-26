@@ -30,8 +30,8 @@ public class TankDrive extends CommandBase {
   @Override
   public void execute() {
    m_drivetrain.driveWithPS4(RobotContainer.ps4Controller, Constants.kSpeed);
-   System.out.println("Execute TankDrive");
-   System.out.println(RobotContainer.ps4Controller.getLeftY());
+   //System.out.println("Execute TankDrive");
+   //System.out.println(RobotContainer.ps4Controller.getLeftY());
   }
 
   // Called once the command ends or is interrupted.

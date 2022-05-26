@@ -34,8 +34,8 @@ public class RobotContainer {
   //private final ShooterUp shooterUpCommand = new ShooterUp(shooterSubsystem);
   //private final ShooterDown shooterDownCommand = new ShooterDown(shooterSubsystem);
 
-  //private final Turret turretSubsystem = new Turret();
-  //private final TurretSpin turretSpinCommand = new TurretSpin(turretSubsystem);
+  private final Turret turretSubsystem = new Turret();
+  private final TurretSpin turretSpinCommand = new TurretSpin(turretSubsystem);
 
   public static PS4Controller ps4Controller;
 
@@ -45,6 +45,9 @@ public class RobotContainer {
     configureButtonBindings();
     tankDriveCommand.addRequirements(drivetrainSubsystem);
     drivetrainSubsystem.setDefaultCommand(tankDriveCommand);
+
+    turretSpinCommand.addRequirements(turretSubsystem);
+    turretSubsystem.setDefaultCommand(turretSpinCommand);
 
     ps4Controller = new PS4Controller(Constants.kButton);
 

@@ -31,6 +31,14 @@ public final class Constants {
     public static final int kShooterRetract = 1;
 
     //Turret.java
-    public static final int kTurretMotor = 5;
+    public static final int kTurretMotor = 9;
     public static final double kSpinSpeed = 0.3;
+
+    //Turret PID
+    public static final double kTurretKp = 0;
+    public static final double kTurretKi = 0;
+    public static final double kTurretKd = 0;
+    public static final double kTurretKf = 0;
+    public static final double kTurretIZone = 0;
+    //public static final double kTurretRampRate =
 }

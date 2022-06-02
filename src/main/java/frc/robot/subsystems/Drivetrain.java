@@ -9,8 +9,11 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants;
@@ -26,10 +29,11 @@ public class Drivetrain extends SubsystemBase{
     private CANSparkMax rightDrive2;
     private MotorControllerGroup rightMotor;
     private DifferentialDrive drive;
-    private Encoder leftencoder;
-    private Encoder rightencoder;
+    private RelativeEncoder leftEncoder, rightEncoder;
     private AnalogGyro gyro;
-    private AnalogInput rangefinder;    
+    private AnalogInput rangefinder; 
+    private SparkMaxPIDController pidControllerLeft, pidControllerRight;   
+    
 
     public Drivetrain() {
         leftDrive1 = new CANSparkMax(Constants.kLeftDrive1, MotorType.kBrushless);
@@ -49,15 +53,33 @@ public class Drivetrain extends SubsystemBase{
            // drive.setExpiration(0.1);
             //drive.setMaxOutput(1.0);
 
-            /*
-        leftencoder = new Encoder(0, 1, false, EncodingType.k4X); //check encoding type
-            addChild("left encoder",leftencoder);
-            leftencoder.setDistancePerPulse(1.0);
 
-        rightencoder = new Encoder(2, 3, false, EncodingType.k4X); //check encoding type
-            addChild("right encoder",rightencoder);
-            rightencoder.setDistancePerPulse(1.0);
            
+        leftEncoder = leftDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
+        rightEncoder = rightDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
+
+        pidControllerLeft = leftDrive1.getPIDController();
+        pidControllerRight = rightDrive1.getPIDController();
+
+        pidControllerLeft.setFeedbackDevice(leftEncoder);
+        pidControllerLeft.setFeedbackDevice(rightEncoder);
+
+        pidControllerLeft.setP(Constants.kP);
+        pidControllerLeft.setI(Constants.kI);
+        pidControllerLeft.setD(Constants.kD);
+        pidControllerLeft.setIZone(Constants.kIz);
+        pidControllerLeft.setFF(Constants.kFF);
+        pidControllerLeft.setOutputRange(Constants.kMinOutput, Constants.kMaxOutput);
+
+        pidControllerRight.setP(Constants.kP);
+        pidControllerRight.setI(Constants.kI);
+        pidControllerRight.setD(Constants.kD);
+        pidControllerRight.setIZone(Constants.kIz);
+        pidControllerRight.setFF(Constants.kFF);
+        pidControllerRight.setOutputRange(Constants.kMinOutput, Constants.kMaxOutput);
+
+
+           /*
         gyro = new AnalogGyro(0);
            addChild("gyro",gyro);
             gyro.setSensitivity(0.007);
@@ -79,7 +101,7 @@ public class Drivetrain extends SubsystemBase{
 
 
     public void driveForward() {
-        drive.tankDrive(Constants.kSpeed, Constants.kSpinSpeed);
+        drive.tankDrive(Constants.kSpeed, Constants.kSpeed);
     }
 
     @Override

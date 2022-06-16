@@ -38,6 +38,7 @@ public class RobotContainer {
   private final TurretSpin turretSpinCommand = new TurretSpin(turretSubsystem);
 
   public static PS4Controller ps4Controller;
+  //public static XboxController xboxController;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -50,12 +51,7 @@ public class RobotContainer {
     turretSubsystem.setDefaultCommand(turretSpinCommand);
 
     ps4Controller = new PS4Controller(Constants.kButton);
-
-    /*if(ps4Controller.getL1ButtonPressed()) {
-      new Shooter().SolenoidUp();
-    }*/
-
-  
+    //xboxController = new XboxController(Constants.kButton);
 
 
   }
@@ -66,7 +62,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+   
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -37,15 +37,15 @@ public class Drivetrain extends SubsystemBase{
 
     public Drivetrain() {
         leftDrive1 = new CANSparkMax(Constants.kLeftDrive1, MotorType.kBrushless);
-            leftDrive1.setInverted(false);
+            leftDrive1.setInverted(true);
         leftDrive2 = new CANSparkMax(Constants.kLeftDrive2, MotorType.kBrushless);
-            leftDrive2.setInverted(false);
+            leftDrive2.setInverted(true);
         leftMotor = new MotorControllerGroup(leftDrive1, leftDrive2);
 
         rightDrive1 = new CANSparkMax(Constants.kRightDrive1, MotorType.kBrushless);
-            rightDrive1.setInverted(true);
+            rightDrive1.setInverted(false);
         rightDrive2 = new CANSparkMax(Constants.kRightDrive2, MotorType.kBrushless);
-            rightDrive2.setInverted(true);
+            rightDrive2.setInverted(false);
         rightMotor = new MotorControllerGroup(rightDrive1, rightDrive2);
 
         drive = new DifferentialDrive(leftMotor, rightMotor);
@@ -55,14 +55,16 @@ public class Drivetrain extends SubsystemBase{
 
 
            
-        leftEncoder = leftDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
-        rightEncoder = rightDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
+        //leftEncoder = leftDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
+        rightEncoder = rightDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+
+        leftEncoder = leftDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
         pidControllerLeft = leftDrive1.getPIDController();
         pidControllerRight = rightDrive1.getPIDController();
 
         pidControllerLeft.setFeedbackDevice(leftEncoder);
-        pidControllerLeft.setFeedbackDevice(rightEncoder);
+        pidControllerRight.setFeedbackDevice(rightEncoder);
 
         pidControllerLeft.setP(Constants.kP);
         pidControllerLeft.setI(Constants.kI);

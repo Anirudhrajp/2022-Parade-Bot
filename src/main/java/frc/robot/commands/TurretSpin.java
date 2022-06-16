@@ -34,6 +34,25 @@ public class TurretSpin extends CommandBase {
     } else if (RobotContainer.ps4Controller.getR1Button() == true) {
       m_turret.turretRight();
     } else m_turret.turretStop();
+
+    if (RobotContainer.ps4Controller.getPOV() == 270) {
+        m_turret.turretLeft();
+    }
+
+    /*
+    if (RobotContainer.ps4Controller.getPOV() == 0 && m_turret.getAngle() < 0 && m_turret.getAngle() < 0) {
+        m_turret.turretLeft();
+    }
+    if (RobotContainer.ps4Controller.getPOV() == 0 && m_turret.getAngle() < 0 && m_turret.getAngle() < 0) {
+      m_turret.turretRight();
+  }
+    if (RobotContainer.ps4Controller.getPOV() == 90 && m_turret.getAngle() < 0 && m_turret.getAngle() < 0){
+      m_turret.turretLeft();
+    }
+    */
+ 
+
+
   }
 
   // Called once the command ends or is interrupted.

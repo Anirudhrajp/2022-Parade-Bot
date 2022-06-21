@@ -50,4 +50,12 @@ public final class Constants {
     public static final double kFF = 0;
     public static final double kMinOutput = 0;
     public static final double kMaxOutput = 0;
+
+    public static final int kAnalogInPort = 2;
+    public static final int kscale = 250; 
+    public static final int koffset = -25;
+    //250(V/5)-25 (find voltage -> pressure conversion)
+
+    
+    
 }

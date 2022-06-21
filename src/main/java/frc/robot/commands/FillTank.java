@@ -5,20 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.AirCompressor;
+import frc.robot.subsystems.AirCompressorSolenoid;
 
-public class CompressorRun extends CommandBase {
+public class FillTank extends CommandBase {
 
-  private final AirCompressor m_compressor;
-
-    public CompressorRun(AirCompressor compressor) {
-      m_compressor = compressor;
-      addRequirements(compressor);     
-    }
-  /** Creates a new CompressorRun. */
-
+    private final AirCompressorSolenoid m_AirCompressorSolenoid;
+  /** Creates a new FillTank. */
+  public FillTank(AirCompressorSolenoid airCompressorSolenoid) {
+      m_AirCompressorSolenoid = airCompressorSolenoid;
+      addRequirements(airCompressorSolenoid);   
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
 
   // Called when the command is initially scheduled.
   @Override
@@ -27,13 +24,12 @@ public class CompressorRun extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_compressor.getPsi() < 120){
-      m_compressor.compressorTurnOn();
-  } else if(m_compressor.getPsi() >= 120) {
-      m_compressor.compressorTurnOff();
+    if (m_AirCompressorSolenoid.getPsi() < 60){
+      m_AirCompressorSolenoid.fillSolenoid();
+  } else if(m_AirCompressorSolenoid.getPsi() >= 60) {
+      m_AirCompressorSolenoid.stopFillSolenoid();
   }
-
-}
+  }
 
   // Called once the command ends or is interrupted.
   @Override

@@ -4,22 +4,26 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class AirCompressorSolenoid extends SubsystemBase {
 
-  private Solenoid airCompressorSolenoid;
+  public static Solenoid airCompressorSolenoid;
   private double psi;
-  private AnalogPotentiometer pressureAnalogPotentiometer;
+  //private AnalogPotentiometer pressureAnalogPotentiometer;
+  private AnalogInput analogInput;
 
   /** Creates a new AirCompressorSolenoid. */
   public AirCompressorSolenoid() {
-    airCompressorSolenoid = new Solenoid(2, PneumaticsModuleType.REVPH, Constants.kShooterDeploy);
-    pressureAnalogPotentiometer = new AnalogPotentiometer(Constants.kAnalogInPort, Constants.kscale, Constants.koffset);
+    airCompressorSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+    analogInput = new AnalogInput(Constants.kAnalogInPort);
+    //pressureAnalogPotentiometer = new AnalogPotentiometer(Constants.kAnalogInPort, Constants.kscale, Constants.koffset);
 
   }
 
@@ -32,9 +36,11 @@ public void stopFillSolenoid(){
 }
 
 public double getPsi() {
-  psi = pressureAnalogPotentiometer.get();
+  psi = analogInput.getAccumulatorValue();
+
   return psi;
 }
+
 
   @Override
   public void periodic() {

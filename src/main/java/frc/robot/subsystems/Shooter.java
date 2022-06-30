@@ -10,7 +10,7 @@ public class Shooter extends SubsystemBase{
 private Solenoid tshirtSolenoid;
 
     public Shooter() {
-        tshirtSolenoid = new Solenoid(1, PneumaticsModuleType.CTREPCM, Constants.kShooterDeploy);
+        tshirtSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
     }
 
     public void SolenoidUp(){

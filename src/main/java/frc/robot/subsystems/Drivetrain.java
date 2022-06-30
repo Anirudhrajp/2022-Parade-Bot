@@ -97,8 +97,8 @@ public class Drivetrain extends SubsystemBase{
 
     }
 
-    public void driveWithPS4(PS4Controller ps4Controller, double speed) {
-        drive.tankDrive(ps4Controller.getLeftY()*Constants.kSpeed, ps4Controller.getRightY()*Constants.kSpeed);
+    public void driveWithXbox(XboxController xboxController, double speed) {
+        drive.tankDrive(xboxController.getLeftY()*Constants.kSpeed, xboxController.getRightY()*Constants.kSpeed);
     }
 
 

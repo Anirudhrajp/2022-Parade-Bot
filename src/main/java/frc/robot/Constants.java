@@ -21,7 +21,7 @@ public final class Constants {
     public static final int kRightDrive2 = 8;
 
     //TankDrive.java
-    public static final double kSpeed = 0.5;
+    public static final double kSpeed = 0.65;
 
     //RobotContainer.java
     public static final int kButton = 0;
@@ -32,7 +32,7 @@ public final class Constants {
 
     //Turret.java
     public static final int kTurretMotor = 9;
-    public static final double kSpinSpeed = 0.3;
+    public static final double kSpinSpeed = 0.25;
 
     //Turret PID
     public static final double kTurretKp = 0;
@@ -51,7 +51,7 @@ public final class Constants {
     public static final double kMinOutput = 0;
     public static final double kMaxOutput = 0;
 
-    public static final int kAnalogInPort = 2;
+    public static final int kAnalogInPort = 3;
     public static final int kscale = 250; 
     public static final int koffset = -25;
     //250(V/5)-25 (find voltage -> pressure conversion)

@@ -23,13 +23,12 @@ public class TankDrive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Initialize TankDrive");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   m_drivetrain.driveWithPS4(RobotContainer.ps4Controller, Constants.kSpeed);
+   m_drivetrain.driveWithXbox(RobotContainer.xboxController, Constants.kSpeed);
    //System.out.println("Execute TankDrive");
    //System.out.println(RobotContainer.ps4Controller.getLeftY());
   }

@@ -29,15 +29,13 @@ public class TurretSpin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   //@Override
   public void execute() {
-    if (RobotContainer.ps4Controller.getL1Button() == true) {
+    if (RobotContainer.xboxController.getRawButton(5)) {
       m_turret.turretLeft();
-    } else if (RobotContainer.ps4Controller.getR1Button() == true) {
+    } else if (RobotContainer.xboxController.getRawButton(6)) {
       m_turret.turretRight();
     } else m_turret.turretStop();
 
-    if (RobotContainer.ps4Controller.getPOV() == 270) {
-        m_turret.turretLeft();
-    }
+    
 
     /*
     if (RobotContainer.ps4Controller.getPOV() == 0 && m_turret.getAngle() < 0 && m_turret.getAngle() < 0) {

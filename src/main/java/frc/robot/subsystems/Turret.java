@@ -18,7 +18,7 @@ public class Turret extends SubsystemBase{
     //private final Encoder turretEncoder = new Encoder(sourceA, sourceB);
     public boolean alignEnabled = true;
 
-    public PIDController turretController = new PIDController(Constants.kTurretKp, Constants.kTurretKi, Constants.kTurretKd);
+    //public PIDController turretController = new PIDController(Constants.kTurretKp, Constants.kTurretKi, Constants.kTurretKd);
 
 
 

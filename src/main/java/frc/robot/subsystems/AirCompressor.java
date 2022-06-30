@@ -18,29 +18,35 @@ public class AirCompressor extends SubsystemBase {
 
   /** Creates a new AirCompressor. */
   public AirCompressor() {
-    compressor =  new Compressor(0, PneumaticsModuleType.CTREPCM);
-    pressureAnalogPotentiometer = new AnalogPotentiometer(Constants.kAnalogInPort, Constants.kscale, Constants.koffset);
+    compressor =  new Compressor(0, PneumaticsModuleType.CTREPCM); //2
+    //pressureAnalogPotentiometer = new AnalogPotentiometer(Constants.kAnalogInPort, Constants.kscale, Constants.koffset);
   }
 
-  
+  /*
   public void compressorTurnOn() {
     compressor.enableDigital();
   }
-
+  */
+/*
   public void compressorTurnOff() {
     compressor.disable();
   }
+  */
 
+  /*
   public double getPressure() {
     pressure = compressor.getPressure();
     return pressure;
   }
+  */
+
+  /*
 
   public double getPsi() {
     psi = pressureAnalogPotentiometer.get();
     return psi;
   }
-
+*/
 
   @Override
   public void periodic() {

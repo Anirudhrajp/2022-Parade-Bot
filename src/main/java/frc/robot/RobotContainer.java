@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.commands.CompressorRun;
 import frc.robot.commands.FillTank;
-import frc.robot.commands.ShooterDown;
 import frc.robot.commands.ShooterUp;
 import frc.robot.commands.TankDrive;
 import frc.robot.commands.TurretSpin;
@@ -35,6 +34,10 @@ public class RobotContainer {
   private final Drivetrain drivetrainSubsystem = new Drivetrain();
   private final TankDrive tankDriveCommand = new TankDrive(drivetrainSubsystem);
 
+  private final Turret turretSubsystem = new Turret();
+  private final TurretSpin turretSpinCommand = new TurretSpin(turretSubsystem);
+
+  
   private final Shooter shooterSubsystem = new Shooter();
   private final ShooterUp shooterUpCommand = new ShooterUp(shooterSubsystem);
   //private final ShooterDown shooterDownCommand = new ShooterDown(shooterSubsystem);
@@ -42,14 +45,12 @@ public class RobotContainer {
   public final static AirCompressor airSubsystem = new AirCompressor();
   private final CompressorRun compressorRunCommand = new CompressorRun(airSubsystem);
   
-  private final Turret turretSubsystem = new Turret();
-  private final TurretSpin turretSpinCommand = new TurretSpin(turretSubsystem);
-
+  
   private final AirCompressorSolenoid airCompressorSolenoidSubsystem = new AirCompressorSolenoid();
   private final FillTank fillTankCommand = new FillTank(airCompressorSolenoidSubsystem);
 
 
-  public static PS4Controller ps4Controller;
+  public static XboxController xboxController;
   //public static XboxController xboxController;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -62,16 +63,20 @@ public class RobotContainer {
     turretSpinCommand.addRequirements(turretSubsystem);
     turretSubsystem.setDefaultCommand(turretSpinCommand);
 
+    
+
     compressorRunCommand.addRequirements(airSubsystem);
     airSubsystem.setDefaultCommand(compressorRunCommand);
 
+    
     shooterUpCommand.addRequirements(shooterSubsystem);
     shooterSubsystem.setDefaultCommand(shooterUpCommand);
 
     fillTankCommand.addRequirements(airCompressorSolenoidSubsystem);
     airCompressorSolenoidSubsystem.setDefaultCommand(fillTankCommand);
 
-    ps4Controller = new PS4Controller(Constants.kButton);
+
+    xboxController = new XboxController(Constants.kButton);
     //xboxController = new XboxController(Constants.kButton);
 
 

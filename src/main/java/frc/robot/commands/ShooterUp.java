@@ -18,24 +18,24 @@ public class ShooterUp extends CommandBase{
 
     // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    //m_shooter.SolenoidUp();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.ps4Controller.getR2Button() == true) {
+    if (RobotContainer.xboxController.getRawButtonPressed(4)) { 
       m_shooter.SolenoidUp();
+    } else if(RobotContainer.xboxController.getRawButtonReleased(4)) {
+      m_shooter.SolenoidDown();
     }
   }
-
+                                                     
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
 
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

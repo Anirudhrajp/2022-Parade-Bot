@@ -5,21 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.AirCompressor;
+import frc.robot.subsystems.AirCompressorSolenoid;
 import frc.robot.subsystems.StackLight;
 
-public class CompressorRun extends CommandBase {
+public class StackLightCommand extends CommandBase {
 
-  private final AirCompressor m_compressor;
+  private final StackLight m_stackLight;
 
-    public CompressorRun(AirCompressor compressor) {
-      m_compressor = compressor;
-      addRequirements(compressor);     
-    }
-  /** Creates a new CompressorRun. */
-
+  /** Creates a new StackLightCommand. */
+  public StackLightCommand(StackLight stackLight) {
+    m_stackLight = stackLight;
+    addRequirements(stackLight);
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
 
   // Called when the command is initially scheduled.
   @Override
@@ -28,14 +26,11 @@ public class CompressorRun extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    if (m_compressor.getPsi() < 120){
-      m_compressor.compressorTurnOn();
-  } else if(m_compressor.getPsi() >= 120) {
-      m_compressor.compressorTurnOff();
-  }*/
+    //if (AirCompressorSolenoid.getPsi() < 60) {
 
-}
+    //}
+  
+  }
 
   // Called once the command ends or is interrupted.
   @Override

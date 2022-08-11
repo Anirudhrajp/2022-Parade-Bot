@@ -21,7 +21,7 @@ public final class Constants {
     public static final int kRightDrive2 = 8;
 
     //TankDrive.java
-    public static final double kSpeed = 0.65;
+    public static final double kSpeed = 0.80;
 
     //RobotContainer.java
     public static final int kButton = 0;

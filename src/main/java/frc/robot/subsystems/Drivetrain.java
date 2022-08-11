@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -8,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
@@ -29,10 +31,12 @@ public class Drivetrain extends SubsystemBase{
     private CANSparkMax rightDrive2;
     private MotorControllerGroup rightMotor;
     private DifferentialDrive drive;
-    private RelativeEncoder leftEncoder, rightEncoder;
+    public RelativeEncoder leftEncoder;
+    private RelativeEncoder rightEncoder;
     private AnalogGyro gyro;
     private AnalogInput rangefinder; 
     private SparkMaxPIDController pidControllerLeft, pidControllerRight;   
+    private double avgDistance;
     
 
     public Drivetrain() {
@@ -53,33 +57,37 @@ public class Drivetrain extends SubsystemBase{
            // drive.setExpiration(0.1);
             //drive.setMaxOutput(1.0);
 
-
            
         //leftEncoder = leftDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
-        rightEncoder = rightDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
+       // rightEncoder = new RelativeEncoder(Constants.kLeftEncoder, Constants.kRightEncoder, true, SparkMaxRelativeEncoder.Type.kHallSensor)
+        
+        rightEncoder = rightDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
         leftEncoder = leftDrive1.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
 
+        avgDistance = (leftEncoder.getPosition() + rightEncoder.getPosition()) / 2;
+
+/*
         pidControllerLeft = leftDrive1.getPIDController();
         pidControllerRight = rightDrive1.getPIDController();
 
         pidControllerLeft.setFeedbackDevice(leftEncoder);
         pidControllerRight.setFeedbackDevice(rightEncoder);
 
-        pidControllerLeft.setP(Constants.kP);
-        pidControllerLeft.setI(Constants.kI);
-        pidControllerLeft.setD(Constants.kD);
-        pidControllerLeft.setIZone(Constants.kIz);
-        pidControllerLeft.setFF(Constants.kFF);
-        pidControllerLeft.setOutputRange(Constants.kMinOutput, Constants.kMaxOutput);
+        pidControllerLeft.setP(4.4225); 0.051755
+        pidControllerLeft.setI(0);
+        pidControllerLeft.setD(0.33333); 3.8488
+        //pidControllerLeft.setIZone(Constants.kIz);
+        //pidControllerLeft.setFF(Constants.kFF);
+        //pidControllerLeft.setOutputRange(Constants.kMinOutput, Constants.kMaxOutput);
 
-        pidControllerRight.setP(Constants.kP);
-        pidControllerRight.setI(Constants.kI);
-        pidControllerRight.setD(Constants.kD);
-        pidControllerRight.setIZone(Constants.kIz);
-        pidControllerRight.setFF(Constants.kFF);
-        pidControllerRight.setOutputRange(Constants.kMinOutput, Constants.kMaxOutput);
-
+        pidControllerRight.setP(4.4225);
+        pidControllerRight.setI(0);
+        pidControllerRight.setD(0.33333);
+        //pidControllerRight.setIZone(Constants.kIz);
+        //pidControllerRight.setFF(Constants.kFF);
+        //pidControllerRight.setOutputRange(Constants.kMinOutput, Constants.kMaxOutput);
+*/
 
            /*
         gyro = new AnalogGyro(0);
@@ -89,10 +97,15 @@ public class Drivetrain extends SubsystemBase{
         rangefinder = new AnalogInput(1);
             addChild("range finder", rangefinder);
            */
+
+        
     }
 
     @Override
     public void periodic() {
+        super.periodic();
+        SmartDashboard.putNumber("LeftEncoder", leftEncoder.getPosition());
+        SmartDashboard.putNumber("RightEncoder", rightEncoder.getPosition());
         // This method will be called once per scheduler run
 
     }
@@ -105,6 +118,12 @@ public class Drivetrain extends SubsystemBase{
     public void driveForward() {
         drive.tankDrive(Constants.kSpeed, Constants.kSpeed);
     }
+
+    public double getAvgDistance() {
+       SmartDashboard.putNumber("LeftEncoder", leftEncoder.getPosition());
+        return avgDistance;
+    }
+
 
     @Override
     public void simulationPeriodic() {

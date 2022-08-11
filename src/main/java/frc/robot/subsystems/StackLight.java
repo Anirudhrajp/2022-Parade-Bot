@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class StackLight extends SubsystemBase {
 
-  private DigitalOutput stackLightRed;
+  private static DigitalOutput stackLightRed;
   private DigitalOutput stackLightGreen;
   /** Creates a new StackLight. */
   public StackLight() {
@@ -17,7 +17,7 @@ public class StackLight extends SubsystemBase {
     stackLightGreen = new DigitalOutput(1);
   }
 
-  public boolean StackLightRedOn() {
+  public static boolean StackLightRedOn() {
     stackLightRed.set(true);
     return true;
   }
@@ -32,7 +32,7 @@ public class StackLight extends SubsystemBase {
     return true;
   }
 
-  public boolean StackLightGreenOff() {
+  public static boolean StackLightGreenOff() {
     stackLightRed.set(false);
     return false;
   }

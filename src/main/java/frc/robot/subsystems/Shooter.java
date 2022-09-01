@@ -26,7 +26,7 @@ private WPI_TalonSRX tshirtMotorController;
 
     public void SolenoidUp(){
         //tshirtSolenoid.set(true);
-        tshirtMotorController.setVoltage(7);
+        tshirtMotorController.setVoltage(12);
     }
 
     public void SolenoidDown() {

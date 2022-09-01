@@ -42,12 +42,12 @@ public class RobotContainer {
   private final ShooterUp shooterUpCommand = new ShooterUp(shooterSubsystem);
   //private final ShooterDown shooterDownCommand = new ShooterDown(shooterSubsystem);
 
-  public final static AirCompressor airSubsystem = new AirCompressor();
-  private final CompressorRun compressorRunCommand = new CompressorRun(airSubsystem);
+  //public final static AirCompressor airSubsystem = new AirCompressor();
+  //private final CompressorRun compressorRunCommand = new CompressorRun(airSubsystem);
   
   
-  private final AirCompressorSolenoid airCompressorSolenoidSubsystem = new AirCompressorSolenoid();
-  private final FillTank fillTankCommand = new FillTank(airCompressorSolenoidSubsystem);
+  //private final AirCompressorSolenoid airCompressorSolenoidSubsystem = new AirCompressorSolenoid();
+  //private final FillTank fillTankCommand = new FillTank(airCompressorSolenoidSubsystem);
 
 
   public static XboxController xboxController;
@@ -65,15 +65,15 @@ public class RobotContainer {
 
     
 
-    compressorRunCommand.addRequirements(airSubsystem);
-    airSubsystem.setDefaultCommand(compressorRunCommand);
+    //compressorRunCommand.addRequirements(airSubsystem);
+    //airSubsystem.setDefaultCommand(compressorRunCommand);
 
     
     shooterUpCommand.addRequirements(shooterSubsystem);
     shooterSubsystem.setDefaultCommand(shooterUpCommand);
 
-    fillTankCommand.addRequirements(airCompressorSolenoidSubsystem);
-    airCompressorSolenoidSubsystem.setDefaultCommand(fillTankCommand);
+    //fillTankCommand.addRequirements(airCompressorSolenoidSubsystem);
+    //airCompressorSolenoidSubsystem.setDefaultCommand(fillTankCommand);
 
 
     xboxController = new XboxController(Constants.kButton);

@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.commands.CompressorRun;
 import frc.robot.commands.FillTank;
 import frc.robot.commands.ShooterUp;
+import frc.robot.commands.SirenPlay;
 import frc.robot.commands.TankDrive;
 import frc.robot.commands.TurretSpin;
 import frc.robot.subsystems.AirCompressor;
 import frc.robot.subsystems.AirCompressorSolenoid;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Siren;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.AirCompressor;
 
@@ -40,6 +42,9 @@ public class RobotContainer {
   
   private final Shooter shooterSubsystem = new Shooter();
   private final ShooterUp shooterUpCommand = new ShooterUp(shooterSubsystem);
+
+  private final Siren sirenSubsystem = new Siren();
+  private final SirenPlay sirenPlayCommamd = new SirenPlay(sirenSubsystem);
   //private final ShooterDown shooterDownCommand = new ShooterDown(shooterSubsystem);
 
   //public final static AirCompressor airSubsystem = new AirCompressor();
@@ -71,6 +76,9 @@ public class RobotContainer {
     
     shooterUpCommand.addRequirements(shooterSubsystem);
     shooterSubsystem.setDefaultCommand(shooterUpCommand);
+
+    sirenPlayCommamd.addRequirements(sirenSubsystem);
+    sirenSubsystem.setDefaultCommand(sirenPlayCommamd);
 
     //fillTankCommand.addRequirements(airCompressorSolenoidSubsystem);
     //airCompressorSolenoidSubsystem.setDefaultCommand(fillTankCommand);

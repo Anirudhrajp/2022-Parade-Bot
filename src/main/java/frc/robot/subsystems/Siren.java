@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Siren extends SubsystemBase {
@@ -15,17 +16,18 @@ public class Siren extends SubsystemBase {
   public Siren() {
 
     treadySiren = new WPI_TalonSRX(6); //change id
+
   }
 
   public void sirenOn(){
     //treadySiren.getMotorOutputVoltage();
-    //treadySiren.configOpenloopRamp(5);
-    treadySiren.setVoltage(12);
+    treadySiren.configOpenloopRamp(3);
+    treadySiren.setVoltage(9);
   
   }
 
   public void sirenOff(){
-    //treadySiren.configOpenloopRamp(5);
+    treadySiren.configOpenloopRamp(3);
     treadySiren.setVoltage(0);
   }
 

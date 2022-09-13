@@ -25,10 +25,10 @@ public class SirenPlay extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.xboxController.getRawButton(7)) {
-      //Siren.sirenOn();
-    } else if(RobotContainer.xboxController.getRawButton(8)) {
-      //Siren.sirenOff();
+    if(RobotContainer.xboxController.getRawButtonPressed(7)) {
+      m_siren.sirenOn();
+    } else if(RobotContainer.xboxController.getRawButtonReleased(7)) {
+      m_siren.sirenOff();
     }
   }
 

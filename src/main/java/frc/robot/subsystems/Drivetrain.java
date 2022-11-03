@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -13,6 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
+
+import java.util.function.Supplier;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -136,6 +140,18 @@ public class Drivetrain extends SubsystemBase{
 
     public void drive(double left, double right) {
         drive.tankDrive(left, right);
+    }
+
+    public Supplier<Pose2d> getPose(Supplier pose) {
+        return pose; 
+    }
+
+    public Supplier<DifferentialDriveWheelSpeeds> getWheelSpeeds(Supplier wheelSpeed) {
+        return wheelSpeed;
+    }
+
+    public void tankDriveVolts() {
+
     }
     
 }

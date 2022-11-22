@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -10,12 +12,14 @@ import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
 
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 import com.revrobotics.CANSparkMax;
@@ -110,6 +114,8 @@ public class Drivetrain extends SubsystemBase{
         super.periodic();
         SmartDashboard.putNumber("LeftEncoder", leftEncoder.getPosition());
         SmartDashboard.putNumber("RightEncoder", rightEncoder.getPosition());
+
+        m_odometry.update(m_gyro.getRotation2d(), getCurrentWheelDistances());
         // This method will be called once per scheduler run
 
     }
@@ -142,16 +148,31 @@ public class Drivetrain extends SubsystemBase{
         drive.tankDrive(left, right);
     }
 
-    public Supplier<Pose2d> getPose(Supplier pose) {
-        return pose; 
-    }
+    public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
+      }
 
     public Supplier<DifferentialDriveWheelSpeeds> getWheelSpeeds(Supplier wheelSpeed) {
         return wheelSpeed;
     }
 
-    public void tankDriveVolts() {
-
+    public BiConsumer<Double, Double> tankDriveVolts() {
+        return null;
     }
+
+    public void resetOdometry(Pose2d pose) {
+        m_odometry.resetPosition(m_gyro.getRotation2d(), getCurrentWheelDistances(), pose);
+      }
+
+      private final Gyro m_gyro = new ADXRS450_Gyro();
+
+  // Odometry class for tracking robot pose
+    DifferentialDriveOdometry m_odometry =
+      new DifferentialDriveOdometry(
+          Constants.kDriveKinematics,
+          m_gyro.getRotation2d(),
+          new MecanumDriveWheelPositions());
+
+    
     
 }

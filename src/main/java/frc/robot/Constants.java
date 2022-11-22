@@ -62,12 +62,12 @@ public final class Constants {
     public static final int ksVolts = 0;
     public static final int kvVoltSecondsPerMeter = 0;
     public static final int kaVoltSecondsSquaredPerMeter = 0;
-    public static final DifferentialDriveKinematics kDriveKinematics = ;
+    public static final DifferentialDriveKinematics kDriveKinematics = null;
     public static final int kMaxSpeedMetersPerSecond = 0;
     public static final int kMaxAccelerationMetersPerSecondSquared = 0;
     public static final int kRamseteB = 0;
     public static final int kRamseteZeta = 0;
-    public static final int kPDriveVel = 0;
+    public static final double kPDriveVel = 2.5366;
 
     
     
